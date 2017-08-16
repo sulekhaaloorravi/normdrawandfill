@@ -1,0 +1,66 @@
+---
+title: "Package: normdrawandfill"
+author: "Sulekha Aloorravi"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+"normdrawandfill" is a package with function "normdrawandfill" to draw Normal distribution density curve (bell curve) and highlight different areas of distribution by filling the area with chosen color and displaying Probability percentages.
+
+## **Function: normdrawandfill {normdrawandfill}**
+## **Usage**
+```{r, fig.show='hold', eval=FALSE}
+normdrawandfill(mean=0,sd=1,points=200,linecolor="orange",fillcolor = "blue",fillafter = NULL,
+fillbefore = NULL, fillwithin = NULL,thickness=40, xlabel = NULL, ylabel = NULL, axiscol = "red")
+```
+
+## **Arguments**
+mean -   mean value of data  
+
+sd -  standard deviation value of data
+
+points - default value is 200. Changing this value will change the length of x-axis
+
+linecolor -  line color of normal curve
+
+fillcolor - color of the shaded area
+
+fillafter - area after this x coordinate will be shaded
+
+fillbefore - area before this x coordinate will be shaded
+
+fillwithin - c(x1,x2) area within these two x coordinates will be shaded
+
+thickness - integer value defining the density of shaded area
+
+xlabel - Label for the x-axis
+
+ylabel - Label for the y-axis
+
+axiscol - color to highlight distance between mean and standard deviation in x-axis
+
+## **Examples**
+```{r eval=FALSE}
+#Normal Distribution Curve
+normdrawandfill(20000,5102,linecolor = "blue", xlab = "Quantity", ylab = "Probability Density")
+
+#P(10000<X<30000)
+normdrawandfill(20000,5102,linecolor = "red", xlab = "Quantity", ylab = "Probability Density",fillwithin = c(10000,30000), fillcolor = "cyan", thickness = 100)
+d1 = paste("  P(10000<X<30000)=", "95%")
+text(30000,0.00006,d1, font = 2, cex = 0.8)
+
+#P(X<10000)
+normdrawandfill(20000,5102,linecolor = "blue", xlab = "Quantity", ylab = "Probability Density",fillbefore = 10000, fillcolor = "lightgreen")
+d1 = paste("  P(X<10000)=", "0.025%")
+text(8000,0.00006,d1, font = 2, cex = 0.8)
+
+#P(X>30000)
+normdrawandfill(20000,5102,linecolor = "blue", xlab = "Quantity", ylab = "Probability Density",fillafter = 30000, fillcolor = "red")
+d1 = paste("  P(X>30000)=", "0.025%")
+text(30000,0.00006,d1, font = 2, cex = 0.8)
+```
+
